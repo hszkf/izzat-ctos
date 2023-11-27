@@ -9,7 +9,7 @@ import { z } from "zod";
 
 interface Props {
   id: number;
-  path: string;
+  path?: string;
 }
 
 const DeleteButton = ({ id }: Props) => {
