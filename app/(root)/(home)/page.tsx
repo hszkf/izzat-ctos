@@ -26,10 +26,12 @@ import { deleteEmployee, getAllUsers } from "@/lib/action/employee.action";
 import { z } from "zod";
 import { IdEmployeeSchema } from "@/lib/validations";
 import DeleteButton from "@/components/shared/button/DeleteButton";
+import { usePathname } from "next/navigation";
 
 const Home = async () => {
   // const [isSubmitting, setIsSubmitting] = useState(false);
   const result = await getAllUsers();
+  const pathname = usePathname();
   // console.log(result);
 
   // async function deleteEmployeeHandler(
@@ -121,7 +123,7 @@ const Home = async () => {
                       >
                         Delete
                       </Button> */}
-                        <DeleteButton id={employee.id} />
+                        <DeleteButton id={employee.id} path={pathname} />
                       </AlertDialogTrigger>
                       <AlertDialogContent>
                         <AlertDialogHeader>
