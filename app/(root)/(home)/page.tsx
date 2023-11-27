@@ -31,7 +31,7 @@ import { usePathname } from "next/navigation";
 const Home = async () => {
   // const [isSubmitting, setIsSubmitting] = useState(false);
   const result = await getAllUsers();
-  const pathname = usePathname();
+  // const pathname = usePathname();
   // console.log(result);
 
   // async function deleteEmployeeHandler(
@@ -123,7 +123,7 @@ const Home = async () => {
                       >
                         Delete
                       </Button> */}
-                        <DeleteButton id={employee.id} path={pathname} />
+                        <DeleteButton id={employee.id} />
                       </AlertDialogTrigger>
                       <AlertDialogContent>
                         <AlertDialogHeader>

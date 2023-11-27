@@ -12,8 +12,8 @@ interface Props {
   path: string;
 }
 
-const DeleteButton = ({ id, path }: Props) => {
-  const pathname = usePathname();
+const DeleteButton = ({ id }: Props) => {
+  const path = usePathname();
   async function deleteEmployeeHandler(
     values: z.infer<typeof IdEmployeeSchema>
   ) {
@@ -21,7 +21,7 @@ const DeleteButton = ({ id, path }: Props) => {
     try {
       await deleteEmployee({
         id: values.id,
-        path: pathname,
+        path: path,
       });
     } catch (error) {
       console.log(error);
