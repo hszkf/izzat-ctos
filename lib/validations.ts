@@ -10,3 +10,8 @@ export const EmployeeSchema = z.object({
         message: "Salary must be a valid number",
     })
 });
+
+export const IdEmployeeSchema = z.object({
+    id: z.coerce.number().refine(value => !isNaN(value)),
+    path: z.string()
+})

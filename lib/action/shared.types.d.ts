@@ -7,3 +7,12 @@ export interface CreateEmployeeParams {
     salary: number;
     path: string;
 }
+
+export interface IdEmployeeParams {
+    id: number;
+    path: string
+}
+
+export interface EmailEmployeeParams {
+    email: string
+}

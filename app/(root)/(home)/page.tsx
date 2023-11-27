@@ -22,11 +22,29 @@ import {
 } from "@/components/ui/alert-dialog";
 
 import React from "react";
-import { getAllUsers } from "@/lib/action/employee.action";
+import { deleteEmployee, getAllUsers } from "@/lib/action/employee.action";
+import { z } from "zod";
+import { IdEmployeeSchema } from "@/lib/validations";
+import DeleteButton from "@/components/shared/button/DeleteButton";
 
 const Home = async () => {
+  // const [isSubmitting, setIsSubmitting] = useState(false);
   const result = await getAllUsers();
   // console.log(result);
+
+  // async function deleteEmployeeHandler(
+  //   values: z.infer<typeof IdEmployeeSchema>
+  // ) {
+  //   // setIsSubmitting(true);
+  //   try {
+  //     await deleteEmployee({
+  //       id: values.id,
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //     throw error;
+  //   }
+  // }
   return (
     // <div>
     //   {result.employees.map((employee) => (
@@ -95,9 +113,14 @@ const Home = async () => {
                   <AlertDialog>
                     <AlertDialogTrigger asChild>
                       {/* <Button variant="destructive">Show Dialog</Button> */}
-                      <Button className="bg-red-600 hover:bg-red-400">
+                      {/* <Button
+                        className="bg-red-600 hover:bg-red-400"
+                        type="submit"
+                        onClick={() => deleteEmployeeHandler(employee.id)}
+                      >
                         Delete
-                      </Button>
+                      </Button> */}
+                      <DeleteButton id={employee.id} />
                     </AlertDialogTrigger>
                     <AlertDialogContent>
                       <AlertDialogHeader>

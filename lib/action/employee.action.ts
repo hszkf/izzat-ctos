@@ -2,7 +2,7 @@
 
 import { PrismaClient } from '@prisma/client'
 import { revalidatePath } from 'next/cache';
-import { CreateEmployeeParams } from "./shared.types";
+import { CreateEmployeeParams, EmailEmployeeParams, IdEmployeeParams } from "./shared.types";
 
 const prisma = new PrismaClient()
 
@@ -40,6 +40,25 @@ export async function createEmployee(params: CreateEmployeeParams) {
         })
 
         revalidatePath(path)
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+export async function deleteEmployee(params: IdEmployeeParams) {
+    try {
+
+        const { id, path } = params;
+
+        await prisma.employee.delete({
+            where: {
+                id
+            }
+        })
+
+        revalidatePath(path)
+
     } catch (error) {
         console.log(error);
         throw error;
