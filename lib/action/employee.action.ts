@@ -1,11 +1,8 @@
 "use server"
 
-import { PrismaClient } from '@prisma/client'
 import { revalidatePath } from 'next/cache';
-import { CreateEmployeeParams, EmailEmployeeParams, IdEmployeeParams } from "./shared.types";
-
-const prisma = new PrismaClient()
-
+import { CreateEmployeeParams, IdEmployeeParams } from "./shared.types";
+import prisma from '../prisma';
 
 export async function getAllUsers() {
     try {
@@ -24,8 +21,6 @@ export async function createEmployee(params: CreateEmployeeParams) {
     try {
 
         const { email, first_name, last_name, avatar, role, salary, path } = params;
-        // console.log('SERVER')
-        // console.log({ params })
 
         // Create the employee
         await prisma.employee.create({

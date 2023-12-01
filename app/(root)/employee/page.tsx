@@ -20,10 +20,12 @@ import {
 import { Button } from "@/components/ui/button";
 import { createEmployee } from "@/lib/action/employee.action";
 import { Input } from "@/components/ui/input";
+import { Toaster, toast } from "sonner";
 
 const Page = () => {
   const editorRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [email, setEmail] = useState("");
   const pathname = usePathname();
   const router = useRouter();
 
@@ -45,10 +47,11 @@ const Page = () => {
     setIsSubmitting(true);
 
     try {
+      setEmail(values.email);
       // make an async call to your API -> create a question
       // contain all form data
-
-      const employee = await createEmployee({
+      setTimeout(function () {});
+      await createEmployee({
         email: values.email,
         first_name: values.first_name,
         last_name: values.last_name,
@@ -57,8 +60,13 @@ const Page = () => {
         salary: values.salary,
         path: pathname,
       });
+
+      // Delay for 2 seconds (2000 milliseconds)
+      setTimeout(function () {
+        router.push("/");
+      }, 3000);
       // navigate to home page
-      router.push("/");
+      // router.push("/");
     } catch (error) {
       console.log(error);
       throw error;
@@ -69,6 +77,7 @@ const Page = () => {
 
   return (
     <>
+      <Toaster position="top-center" richColors />
       <h1 className="mt-12 scroll-m-20 text-2xl font-semibold tracking-tight">
         Add Employee Details
       </h1>
@@ -183,7 +192,11 @@ const Page = () => {
               </FormItem>
             )}
           />{" "}
-          <Button type="submit" disabled={isSubmitting}>
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            onClick={() => toast.success(`New employee has been created`)}
+          >
             {isSubmitting ? <div>Submitting...</div> : <div>Submit</div>}
           </Button>
         </form>

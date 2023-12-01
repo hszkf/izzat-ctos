@@ -1,6 +1,8 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button, buttonVariants } from "@/components/ui/button";
 import Link from "@/node_modules/next/link";
+import { Toaster, toast } from "sonner";
+
 import {
   Card,
   CardDescription,
@@ -9,51 +11,18 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-
 import React from "react";
-import { deleteEmployee, getAllUsers } from "@/lib/action/employee.action";
-import { z } from "zod";
-import { IdEmployeeSchema } from "@/lib/validations";
-import DeleteButton from "@/components/shared/button/DeleteButton";
-import { usePathname } from "next/navigation";
+import { getAllUsers } from "@/lib/action/employee.action";
+
+import DeleteAlertDialog from "@/components/shared/Dialog/DeleteAlertDialog";
 
 const Home = async () => {
   // const [isSubmitting, setIsSubmitting] = useState(false);
   const result = await getAllUsers();
-  // const pathname = usePathname();
-  // console.log(result);
 
-  // async function deleteEmployeeHandler(
-  //   values: z.infer<typeof IdEmployeeSchema>
-  // ) {
-  //   // setIsSubmitting(true);
-  //   try {
-  //     await deleteEmployee({
-  //       id: values.id,
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //     throw error;
-  //   }
-  // }
   return (
-    // <div>
-    //   {result.employees.map((employee) => (
-    //     <div key={employee.id}>{employee.last_name}</div>
-    //   ))}
-    // </div>
     <>
+      <Toaster />
       <div className="mt-6">
         <Link
           className={buttonVariants({ variant: "outline" })}
@@ -113,37 +82,12 @@ const Home = async () => {
                     >
                       Edit details
                     </Link>
-                    <AlertDialog>
-                      <AlertDialogTrigger asChild>
-                        {/* <Button variant="destructive">Show Dialog</Button> */}
-                        {/* <Button
-                        className="bg-red-600 hover:bg-red-400"
-                        type="submit"
-                        onClick={() => deleteEmployeeHandler(employee.id)}
-                      >
-                        Delete
-                      </Button> */}
-                        <DeleteButton id={employee.id} />
-                      </AlertDialogTrigger>
-                      <AlertDialogContent>
-                        <AlertDialogHeader>
-                          <AlertDialogTitle>
-                            <span className="">Are you absolutely sure?</span>
-                          </AlertDialogTitle>
-                          <AlertDialogDescription>
-                            This action cannot be undone. This will permanently
-                            delete your account and remove your data from our
-                            servers.
-                          </AlertDialogDescription>
-                        </AlertDialogHeader>
-                        <AlertDialogFooter>
-                          <AlertDialogCancel>Cancel</AlertDialogCancel>
-                          <AlertDialogAction className="bg-red-600 hover:bg-red-400">
-                            Continue
-                          </AlertDialogAction>
-                        </AlertDialogFooter>
-                      </AlertDialogContent>
-                    </AlertDialog>
+
+                    <DeleteAlertDialog
+                      id={employee.id}
+                      first_name={employee.first_name}
+                      last_name={employee.last_name}
+                    />
                   </div>
                 </CardFooter>
               </Card>
