@@ -70,7 +70,7 @@ const DeleteAlertDialog = ({ id, first_name, last_name }: Props) => {
             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
             <AlertDialogDescription>
               This action cannot be undone. This will permanently delete{" "}
-              {first_name} {last_name} account and remove his/her data. servers.
+              {first_name} {last_name} account and remove his/her data.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
